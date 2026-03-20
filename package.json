@@ -1,7 +1,12 @@
 {
-  "name": "eigalang-editor",
-  "displayName": "EigaLang-Editor",
+  "name": "eigalang",
+  "displayName": "EigaLang",
   "description": "EigaLang Syntax highlight for VScode.",
+  "author": {
+    "name": "Midry",
+    "url": "https://tmidry.com/"
+  },
+  "license": "MIT",
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.110.0"
@@ -17,15 +22,24 @@
     "typescript": "^5.0.0"
   },
   "categories": [
-    "Formatters"
+    "Programming Languages"
   ],
   "contributes": {
-    "languages": [{
-      "id": "eiga",
-      "aliases": ["EigaLang", "eiga", "EigaMacro"],
-      "extensions": [".eiga",".eigam"],
-      "configuration": "./language-configuration.json"
-    }],
+    "languages": [
+      {
+        "id": "eiga",
+        "aliases": [
+          "EigaLang",
+          "eiga",
+          "EigaMacro"
+        ],
+        "extensions": [
+          ".eiga",
+          ".eigam"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
     "grammars": [
       {
         "language": "eiga",
@@ -34,11 +48,14 @@
       }
     ]
   },
-  "snippets": [
-			{
-				"language": "eiga",
-				"scopeName": "source.eiga",
-				"path": "./snippet/eiga.snippet.json"
-			}
-		]
+  "dependencies": {
+    "@vscode/vsce": "^3.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/midry3/eiga-vscode"
+  },
+  "activationEvents": [
+    "onLanguage:eiga"
+  ]
 }
