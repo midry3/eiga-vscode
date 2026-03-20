@@ -1,0 +1,140 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "EigaLang",
+	"patterns": [
+		{
+			"include": "#speaker"
+		},
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#func_call"
+		},
+		{
+			"include": "#macro"
+		},
+		{
+			"include": "#macro2"
+		},
+		{
+			"include": "#trans"
+		}
+	],
+	"repository": {
+		"speaker": {
+			"patterns": [
+				{
+		    		"match": "^(\\s*)(@)([^\\s]*?)(?=\\s|$)",
+		    		"captures": {
+		    		"2": {
+		        		"name": "constant.numeric.eiga"
+		    		},
+		    		"3": {
+		        		"name": "entity.name.type.eiga"
+		    		}
+		    	}
+		    }
+		  ]
+		},
+		"trans": {
+			"patterns": [
+				{
+		    		"match": "^(\\s*)(->)([^#]*?)(?=#|$)",
+		    		"captures": {
+		    		"2": {
+		        		"name": "constant.numeric.eiga"
+		    		},
+		    		"3": {
+		        		"name": "string.quoted.double.eiga"
+		    		}
+		    	}
+		    }
+		  ]
+		},
+		"comment": {
+			"patterns": [{
+				"name": "comment.eiga",
+				"match": "#.*$"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.eiga",
+			"begin": "\"",
+			"end": "\""
+		},
+		"num": {
+			"patterns": [{
+				"name": "constant.numeric.eiga",
+				"match": "\\b\\d+(?:\\.\\d+)?\\b"
+			}]
+		},
+		"func_call": {
+  			"patterns": [
+			    {
+					"name": "meta.function-call.eiga",
+			    	"begin": "\\[([^\\[(]+?)\\(",
+			    	"beginCaptures": {
+			    		"0": { "name": "meta.function-call.eiga" },
+			        	"1": { "name": "support.function.eiga" }
+			      	},
+			      	"end": "\\)\\s*\\]",
+			      	"endCaptures": {
+			        	"0": { "name": "meta.function-call.eiga" }
+			      	},
+			      	"patterns": [
+			        	{
+			          	"include": "#num"
+			        	},
+			        	{
+			          	"include": "#strings"
+			        	}
+			      	]
+			    }
+			]
+		},
+		"macro": {
+  			"patterns": [
+			    {
+					"name": "meta.function-call.eiga",
+			    	"begin": "<([^<>()\\s]+)\\(",
+			    	"beginCaptures": {
+			    		"0": { "name": "constant.numeric.eiga" },
+			        	"1": { "name": "entity.name.function.preprocessor.eiga" }
+			      	},
+			      	"end": "\\)>",
+			      	"endCaptures": {
+			        	"0": { "name": "constant.numeric.eiga" }
+			      	},
+			      	"patterns": [
+			        	{
+			          	"include": "#num"
+			        	},
+			        	{
+			          	"include": "#strings"
+			        	}
+			      	]
+			    }
+			]
+		},
+		"macro2": {
+    		"patterns": [
+    	    	{
+    	    		"match": "(<)([^<>()\\s]+)(>)",
+    	    		"captures": {
+						"1": {
+    	        			"name": "constant.numeric.eiga"
+						},
+    	        		"2": {
+    	        			"name": "entity.name.function.preprocessor.eiga"
+						},
+						"3": {
+    	        			"name": "constant.numeric.eiga"
+						}
+    				}
+    			}
+    		]
+    	}
+	},
+	"scopeName": "source.eiga"
+}

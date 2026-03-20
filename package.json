@@ -1,0 +1,44 @@
+{
+  "name": "eigalang-editor",
+  "displayName": "EigaLang-Editor",
+  "description": "EigaLang Syntax highlight for VScode.",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.110.0"
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.0.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "eiga",
+      "aliases": ["EigaLang", "eiga", "EigaMacro"],
+      "extensions": [".eiga",".eigam"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [
+      {
+        "language": "eiga",
+        "scopeName": "source.eiga",
+        "path": "./syntaxes/eiga.tmLanguage.json"
+      }
+    ]
+  },
+  "snippets": [
+			{
+				"language": "eiga",
+				"scopeName": "source.eiga",
+				"path": "./snippet/eiga.snippet.json"
+			}
+		]
+}
